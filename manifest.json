@@ -1,0 +1,7 @@
+{
+  "id":"./","name":"Universo Verade","short_name":"Verade","lang":"pt-BR",
+  "description":"Loja, vídeos, novidades e comunidade do Universo Verade.",
+  "start_url":"./index.html","scope":"./","display":"standalone",
+  "background_color":"#0b0b12","theme_color":"#10101a",
+  "icons":[{"src":"./logo.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}]
+}

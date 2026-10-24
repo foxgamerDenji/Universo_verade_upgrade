@@ -1,0 +1,5 @@
+const CACHE="verade-pro-v1";
+const SHELL=["./","./index.html","./app.js","./manifest.json","./logo.svg","./admin.html"];
+self.addEventListener("install",e=>e.waitUntil((async()=>{const c=await caches.open(CACHE);await c.addAll(SHELL);await self.skipWaiting()})()));
+self.addEventListener("activate",e=>e.waitUntil((async()=>{await Promise.all((await caches.keys()).filter(k=>k.startsWith("verade-pro-")&&k!==CACHE).map(k=>caches.delete(k)));await self.clients.claim()})()));
+self.addEventListener("fetch",e=>{const r=e.request,u=new URL(r.url);if(r.method!=="GET"||u.origin!==location.origin)return;if(r.mode==="navigate"){e.respondWith((async()=>{try{const x=await fetch(r);(await caches.open(CACHE)).put(r,x.clone());return x}catch{return(await caches.match(r))||(await caches.match("./index.html"))||Response.error()}})());return}e.respondWith((async()=>{const x=await caches.match(r);if(x)return x;try{const y=await fetch(r);if(y.ok)(await caches.open(CACHE)).put(r,y.clone());return y}catch{return Response.error()}})())});
