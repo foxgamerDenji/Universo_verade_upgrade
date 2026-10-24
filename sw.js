@@ -1,4 +1,4 @@
-const CACHE="verade-pro-v1";
+const CACHE="verade-pro-v2";
 const SHELL=["./","./index.html","./app.js","./manifest.json","./logo.svg","./admin.html"];
 self.addEventListener("install",e=>e.waitUntil((async()=>{const c=await caches.open(CACHE);await c.addAll(SHELL);await self.skipWaiting()})()));
 self.addEventListener("activate",e=>e.waitUntil((async()=>{await Promise.all((await caches.keys()).filter(k=>k.startsWith("verade-pro-")&&k!==CACHE).map(k=>caches.delete(k)));await self.clients.claim()})()));
